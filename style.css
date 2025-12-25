@@ -331,7 +331,7 @@ footer li {
 }
 
 @keyframes rotating {
-  form {
+  from {
     transform: rotate(0);
   }
   to {

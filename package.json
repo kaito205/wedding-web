@@ -1,0 +1,13 @@
+{
+  "name": "wedding-invitation",
+  "version": "1.0.0",
+  "description": "Wedding invitation for Kaito & Elaina",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "serve": "^14.2.4"
+  }
+}
