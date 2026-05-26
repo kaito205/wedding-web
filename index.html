@@ -62,7 +62,7 @@
         aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel" data-bs-theme="dark">
         <div class="offcanvas-header">
           <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Kaito</h5>
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -640,6 +640,19 @@
         window.scrollTo({
           top: 0,
           behavior: 'smooth'
+        });
+      });
+
+      // Auto-close Offcanvas Menu when a nav-link is clicked (Mobile UX Fix)
+      const navLinks = document.querySelectorAll('.mynavbar .nav-link');
+      const offcanvasElement = document.getElementById('offcanvasNavbar');
+      const offcanvasInstance = bootstrap.Offcanvas.getOrCreateInstance(offcanvasElement);
+
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          if (offcanvasElement.classList.contains('show')) {
+            offcanvasInstance.hide();
+          }
         });
       });
     });
