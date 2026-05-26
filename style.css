@@ -6,7 +6,6 @@
 body {
   font-size: 1.2rem;
   font-family: "Work Sans", sans-serif;
-  min-height: 4000px;
 }
 .hero::before {
   content: "";
@@ -67,6 +66,12 @@ h4,
 
 .mynavbar .nav-link {
   text-transform: uppercase;
+  transition: color 0.3s ease, font-weight 0.3s ease;
+}
+.mynavbar .nav-link.active,
+.mynavbar .nav-link:hover {
+  color: var(--pink) !important;
+  font-weight: 600;
 }
 .home {
   background-image: url(img/bg4.jpg);
@@ -98,6 +103,7 @@ h4,
 }
 .home .couple {
   margin-top: 100px;
+  position: relative;
 }
 .home .couple h3 {
   font-family: "Sacramento", cursive;
@@ -306,28 +312,48 @@ footer a {
 footer a:hover {
   color: white;
 }
+footer ul {
+  padding-left: 0;
+}
 footer li {
   list-style: none;
-  display: inline;
+  display: inline-block;
   margin: 0.5rem;
 }
+footer li a {
+  color: white;
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+footer li a:hover {
+  color: var(--bg);
+  transform: translateY(-3px);
+}
 .audio-icon-wrapper {
-  width: 4rem;
-  height: 4rem;
-  font-size: 4rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  font-size: 2.2rem;
   position: fixed;
   bottom: 2.5rem;
   right: 2rem;
   cursor: pointer;
   color: white;
-  opacity: 0.5;
-  mix-blend-mode: difference;
-  animation: rotating 4s linear infinite;
+  background-color: var(--pink);
+  border-radius: 50%;
+  box-shadow: 0 4px 15px rgba(191, 10, 48, 0.4);
+  animation: rotating 4s linear infinite, pulsing 2s infinite;
   transform-origin: center;
   display: flex;
   justify-content: center;
   align-items: center;
   line-height: 0;
+  z-index: 9999;
+  transition: transform 0.2s ease;
+}
+
+.audio-icon-wrapper:active {
+  transform: scale(0.9);
 }
 
 @keyframes rotating {
@@ -339,14 +365,26 @@ footer li {
   }
 }
 
+.audio-icon-wrapper.paused {
+  animation-play-state: paused, running;
+}
+
+@keyframes pulsing {
+  0% {
+    box-shadow: 0 0 0 0 rgba(191, 10, 48, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(191, 10, 48, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(191, 10, 48, 0);
+  }
+}
+
 /* leptop */
 @media (max-width: 992px) {
   html {
     font-size: 75%;
-  }
-  .simply-countdown > .simply-section {
-    padding: 70px;
-    margin: 10px;
   }
   .home .heart {
     display: none;
@@ -381,10 +419,6 @@ footer li {
   html {
     font-size: 65%;
   }
-  .simply-countdown > .simply-section {
-    padding: 60px;
-    margin: 5px;
-  }
 
   .mynavbar .nav-link {
     font-size: 2rem;
@@ -403,10 +437,6 @@ footer li {
   html {
     font-size: 60%;
   }
-  .simply-countdown > .simply-section {
-    padding: 45px;
-    margin: 3px;
-  }
   .timeline li .timeline-image {
     width: 80px;
     height: 80px;
@@ -422,4 +452,85 @@ footer li {
   .timeline li .timeline-panel::after {
     top: 31px;
   }
+}
+
+/* Gifts Copy Button Custom Styles */
+.gifts .btn-copy {
+  border: 1px solid var(--pink);
+  color: var(--pink);
+  background-color: transparent;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.gifts .btn-copy:hover {
+  background-color: var(--pink);
+  color: white;
+}
+
+.gifts .btn-copy.copied {
+  background-color: #198754 !important;
+  border-color: #198754 !important;
+  color: white !important;
+}
+
+/* Gallery Hover Effects */
+.gallery a {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--bs-border-radius);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.gallery a img {
+  transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.gallery a::after {
+  content: "\f52a"; /* Bootstrap icon bi-search */
+  font-family: "bootstrap-icons";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(191, 10, 48, 0.6); /* Red-pink theme background overlay */
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gallery a:hover::after {
+  opacity: 1;
+}
+
+.gallery a:hover img {
+  transform: scale(1.1);
+  filter: brightness(0.8);
+}
+
+/* Gift Cards Premium Styling */
+.card-gift {
+  background: #ffffff;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(191, 10, 48, 0.1) !important;
+}
+
+.card-gift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(191, 10, 48, 0.15) !important;
+}
+
+.card-gift .card-title {
+  color: var(--pink);
+  letter-spacing: 1px;
 }
