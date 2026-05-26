@@ -507,20 +507,26 @@
     let isPlaying = false;
 
     function disableScroll() {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-
+      window.scrollTo(0, 0);
       window.onscroll = function () {
-        window.scrollTo(scrollLeft, scrollTop);
+        window.scrollTo(0, 0);
       }
-
+      document.body.style.overflow = 'hidden';
       rootElement.style.scrollBehavior = 'auto';
     }
 
     function enableScroll() {
       window.onscroll = function () {}
+      document.body.style.overflow = 'initial';
       rootElement.style.scrollBehavior = 'smooth';
-      // localStorage.setItem('opened', 'true');
+      
+      const hero = document.getElementById('hero');
+      hero.classList.add('fade-out');
+      
+      setTimeout(() => {
+        hero.style.display = 'none';
+      }, 1000);
+      
       playAudio();
     }
 
